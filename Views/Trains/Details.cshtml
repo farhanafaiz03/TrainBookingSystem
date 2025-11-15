@@ -1,0 +1,36 @@
+﻿@model TrainBookingSystem.Models.Train
+@{
+    ViewData["Title"] = "Train Details";
+}
+
+<h2>@Model.Name Details</h2>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <td>Departure City</td>
+        <td>@Model.DepartureCity</td>
+    </tr>
+    <tr>
+        <td>Arrival City</td>
+        <td>@Model.ArrivalCity</td>
+    </tr>
+    <tr>
+        <td>Departure Time</td>
+        <td>@Model.DepartureTime</td>
+    </tr>
+    <tr>
+        <td>Arrival Time</td>
+        <td>@Model.ArrivalTime</td>
+    </tr>
+    <tr>
+        <td>Seats Available</td>
+        <td>@Model.SeatsAvailable</td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td>@Model.Price</td>
+    </tr>
+</table>
+
+<a asp-controller="Bookings" asp-action="Create" asp-route-trainId="@Model.TrainId">Book Ticket</a>
+<a asp-action="Search">Back to Search</a>

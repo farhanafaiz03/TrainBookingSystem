@@ -1,0 +1,54 @@
+﻿@model List<TrainBookingSystem.Models.Train>
+@{
+    ViewData["Title"] = "Search Trains";
+}
+
+<h2>Search Trains</h2>
+
+<form method="get" asp-controller="Trains" asp-action="Search">
+    <label>Departure City:</label>
+    <input type="text" name="departureCity" value="@ViewBag.DepartureCity" />
+    <label>Arrival City:</label>
+    <input type="text" name="arrivalCity" value="@ViewBag.ArrivalCity" />
+    <label>Travel Date:</label>
+    <input type="date" name="travelDate" value="@ViewBag.TravelDate" />
+    <label>Class:</label>
+    <select name="travelClass">
+        <option value="Economy">Economy</option>
+        <option value="Business">Business</option>
+        <option value="First">First</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <h3>Available Trains:</h3>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Name</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Seats</th>
+            <th>Price</th>
+            <th>Details</th>
+        </tr>
+        @foreach (var train in Model)
+        {
+            <tr>
+                <td>@train.Name</td>
+                <td>@train.DepartureCity (@train.DepartureTime)</td>
+                <td>@train.ArrivalCity (@train.ArrivalTime)</td>
+                <td>@train.SeatsAvailable</td>
+                <td>@train.Price</td>
+                <td>
+                    <a asp-controller="Trains" asp-action="Details" asp-route-id="@train.TrainId">View</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No trains found.</p>
+}
