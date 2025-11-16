@@ -1,6 +1,6 @@
 ﻿namespace TrainBookingSystem.Models
 {
-    public class Admin
+    public class TrainSearchViewModel
     {
     }
 }

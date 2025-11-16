@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Models\AdminViewModels\" />
+    <Folder Include="Views\Admin\Users\" />
+    <Folder Include="Views\Admin\Trains\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

@@ -1,4 +1,52 @@
-﻿@page
-@model TrainBookingSystem.Views.Bookings.MyBookingsModel
+﻿@model List<TrainBookingSystem.Models.Booking>
 @{
+    ViewData["Title"] = "My Bookings";
+}
+
+<h2>My Bookings</h2>
+
+@if (TempData["BookingConfirmation"] != null)
+{
+    <div class="alert alert-success">@TempData["BookingConfirmation"]</div>
+}
+
+@if (TempData["CancelMessage"] != null)
+{
+    <div class="alert alert-info">@TempData["CancelMessage"]</div>
+}
+
+@if (Model.Count == 0)
+{
+    <p>You have no bookings yet.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Train ID</th>
+                <th>Seats</th>
+                <th>Date Booked</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.BookingId</td>
+                    <td>@booking.TrainId</td>
+                    <td>@booking.Seats</td>
+                    <td>@booking.BookingDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <form asp-action="Cancel" method="post">
+                            <input type="hidden" name="id" value="@booking.BookingId" />
+                            <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

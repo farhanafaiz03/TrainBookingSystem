@@ -1,4 +1,55 @@
-﻿@page
-@model TrainBookingSystem.Views.Bookings.CreateModel
+﻿@model TrainBookingSystem.Models.Booking
+
 @{
+    ViewData["Title"] = "Book Ticket";
+}
+
+<h2>Book Ticket</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label>Train:</label>
+        <span>@ViewBag.TrainName</span>
+    </div>
+
+    <div>
+        <label>From:</label>
+        <span>@ViewBag.DepartureCity</span>
+    </div>
+
+    <div>
+        <label>To:</label>
+        <span>@ViewBag.ArrivalCity</span>
+    </div>
+
+    <div>
+        <label>Departure:</label>
+        <span>@ViewBag.DepartureTime.ToString("dd/MM/yyyy HH:mm")</span>
+    </div>
+
+    <div>
+        <label>Arrival:</label>
+        <span>@ViewBag.ArrivalTime.ToString("dd/MM/yyyy HH:mm")</span>
+    </div>
+
+    <div>
+        <label>Seats Available:</label>
+        <span>@ViewBag.SeatsAvailable</span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Seats">Number of Seats to Book</label>
+        <input asp-for="Seats" type="number" class="form-control" min="1" max="@ViewBag.SeatsAvailable" />
+        <span asp-validation-for="Seats" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="TrainId" value="@ViewBag.TrainId" />
+    <input type="hidden" asp-for="BookingDate" value="@DateTime.Now" />
+    <input type="hidden" asp-for="UserId" value="@User.Identity.Name" />
+
+    <button type="submit" class="btn btn-primary">Book Ticket</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
